@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{15C3A4F8-99E8-41A0-848E-ED9D94265DD8}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Iterator</RootNamespace>
+    <RootNamespace>Composite</RootNamespace>
     <AssemblyName>Iterator</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -43,12 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MenuIterator\AlternatingDinerMenuIterator.cs" />
-    <Compile Include="MenuIterator\DinerMenuIterator.cs" />
-    <Compile Include="Menu\CafeMenu.cs" />
-    <Compile Include="Menu\IMenu.cs" />
+    <Compile Include="MenuIterator\CompositeIterator.cs" />
+    <Compile Include="MenuIterator\NullIterator.cs" />
+    <Compile Include="Menu\Menu.cs" />
+    <Compile Include="Menu\MenuComponent.cs" />
     <Compile Include="Menu\MenuItem.cs" />
-    <Compile Include="Menu\DinerMenu.cs" />
-    <Compile Include="Menu\PancakeHouseMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Waitress.cs" />

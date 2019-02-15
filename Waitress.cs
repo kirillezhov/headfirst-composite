@@ -1,5 +1,5 @@
-﻿using Iterator.Menu;
-using Iterator.MenuIterator;
+﻿using Composite.Menu;
+using Composite.MenuIterator;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,40 +7,46 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Iterator
+namespace Composite
 {
     class Waitress
     {
-        IMenu pancakeHouseMenu, dinerMenu, cafeMenu;
+        MenuComponent allMenus;
 
-        public Waitress(IMenu pancakeHouseMenu, IMenu dinerMenu, IMenu cafeMenu)
+        public Waitress(MenuComponent allMenus)
         {
-            this.pancakeHouseMenu = pancakeHouseMenu;
-            this.dinerMenu = dinerMenu;
-            this.cafeMenu = cafeMenu;
+            this.allMenus = allMenus;
         }
 
         public void PrintMenu()
         {
-            IEnumerator<MenuItem> pancakeIterator = pancakeHouseMenu.CreateIterator();
-            IEnumerator<MenuItem> dinerIterator = dinerMenu.CreateIterator();
-            IEnumerator<MenuItem> cafeIterator = cafeMenu.CreateIterator();
-            Console.WriteLine("MENU\r\n----\r\nBREAKFAST");
-            PrintMenu(pancakeIterator);
-            Console.WriteLine("\r\nLUNCH");
-            PrintMenu(dinerIterator);
-            Console.WriteLine("\r\nDINNER");
-            PrintMenu(cafeIterator);
+            allMenus.Print();
         }
 
-        private void PrintMenu(IEnumerator<MenuItem> iterator)
+        public void PrintVegetarianMenu()
         {
-            while (iterator.MoveNext())
+            IEnumerator<MenuComponent> enumerator = allMenus.CreateIterator();
+            Console.WriteLine("\r\nVEGETARIAN MENU\r\n----");
+            while (enumerator.MoveNext())
             {
-                MenuItem menuItem = iterator.Current;
-                Console.Write(menuItem.GetName() + ", ");
-                Console.Write(menuItem.GetPrice() + " -- ");
-                Console.WriteLine(menuItem.GetDescription());
+                MenuComponent menuComponent = enumerator.Current;
+
+                if(menuComponent is MenuItem)
+                {
+                    if (menuComponent.IsVegetarian())
+                    {
+                        menuComponent.Print();
+                    }
+                }
+
+                //try
+                //{
+                //    if (menuComponent.IsVegetarian())
+                //    {
+                //        menuComponent.Print();
+                //    }
+                //}
+                //catch(InvalidOperationException){ }
             }
         }
     }
